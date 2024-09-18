@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { HoveredLink, Menu, MenuItem, ProductItem } from "./navbar-menu";
+import { HoveredLink, Menu, MenuItem, ProductItem } from "./ui/navbar-menu";
 import { cn } from "../lib/utils";
 import Image from "next/image";
 import { Gemunu_Libre } from "next/font/google";
@@ -11,6 +11,7 @@ const gemunuLibre = Gemunu_Libre({
   display: "swap",
 });
 
+// wrap logo in a link to the home page
 const Logo = () => (
   <div className="flex items-center space-x-2">
     <Image
@@ -29,6 +30,18 @@ const Logo = () => (
   </div>
 );
 
+/*
+<MenuItem setActive={setActive} active={active} item="Alumni">
+  <div className="flex flex-col space-y-4 text-sm">
+    <HoveredLink href="/network">Alumni Network</HoveredLink>
+    <HoveredLink href="/events">Alumni Events</HoveredLink>
+    <HoveredLink href="/stories">Success Stories</HoveredLink>
+  </div>
+</MenuItem>
+
+              // <HoveredLink href="/batch3">Batch 3 \uD83D\uDD25</HoveredLink>
+*/
+
 export function Navbar({ className }: { className?: string }) {
   const [active, setActive] = useState<string | null>(null);
 
@@ -41,25 +54,26 @@ export function Navbar({ className }: { className?: string }) {
         <div className="flex justify-between items-center w-full px-4">
           <Logo />
           <div className="flex space-x-4">
-            <MenuItem setActive={setActive} active={active} item="Team">
+            <MenuItem
+              setActive={setActive}
+              active={active}
+              item="Team"
+              link="/team"
+            >
               <div className="flex flex-col space-y-4 text-sm">
                 <HoveredLink href="/team">Our Team</HoveredLink>
-                <HoveredLink href="/culture">Our Culture</HoveredLink>
-                <HoveredLink href="/careers">Careers</HoveredLink>
+                <HoveredLink href={"/friends"}>Friends of Next </HoveredLink>
               </div>
             </MenuItem>
-            <MenuItem setActive={setActive} active={active} item="Join">
+            <MenuItem
+              setActive={setActive}
+              active={active}
+              item="Join"
+              link="/join"
+            >
               <div className="flex flex-col space-y-4 text-sm">
-                <HoveredLink href="/apply">Apply Now</HoveredLink>
-                <HoveredLink href="/volunteer">Volunteer</HoveredLink>
-                <HoveredLink href="/sponsor">Sponsor</HoveredLink>
-              </div>
-            </MenuItem>
-            <MenuItem setActive={setActive} active={active} item="Alumni">
-              <div className="flex flex-col space-y-4 text-sm">
-                <HoveredLink href="/network">Alumni Network</HoveredLink>
-                <HoveredLink href="/events">Alumni Events</HoveredLink>
-                <HoveredLink href="/stories">Success Stories</HoveredLink>
+                <HoveredLink href="/join#apply">Apply Now</HoveredLink>
+                <HoveredLink href="/join#tracks">Tracks</HoveredLink>
               </div>
             </MenuItem>
           </div>
