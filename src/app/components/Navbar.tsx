@@ -4,6 +4,7 @@ import { HoveredLink, Menu, MenuItem, ProductItem } from "./ui/navbar-menu";
 import { cn } from "../lib/utils";
 import Image from "next/image";
 import { Gemunu_Libre } from "next/font/google";
+import Link from "next/link";
 
 const gemunuLibre = Gemunu_Libre({
   subsets: ["latin"],
@@ -12,23 +13,26 @@ const gemunuLibre = Gemunu_Libre({
 });
 
 // wrap logo in a link to the home page
+
 const Logo = () => (
-  <div className="flex items-center space-x-2">
-    <Image
-      src="/img/nextwhite.png"
-      alt="DubHacks Next Logo"
-      //layout="fill"
-      // objectFit="contain"
-      width={40}
-      height={40}
-    />
+  <Link href="/" className="flex items-center space-x-1 sm:space-x-2">
+    <div className="relative w-8 h-8 sm:w-10 sm:h-10">
+      <Image
+        src="/img/nextwhite.png"
+        alt="DubHacks Next Logo"
+        fill
+        style={{ objectFit: "contain" }}
+      />
+    </div>
     <span
-      className={`text-white font-bold text-[2rem] tracking-wider ${gemunuLibre.className}`}
+      className={`text-white font-bold text-lg sm:text-2xl md:text-3xl tracking-wider ${gemunuLibre.className}`}
     >
       DUBHACKS NEXT
     </span>
-  </div>
+  </Link>
 );
+
+export default Logo;
 
 /*
 <MenuItem setActive={setActive} active={active} item="Alumni">
@@ -48,7 +52,9 @@ export function Navbar({ className }: { className?: string }) {
   return (
     <div
       // className={cn("fixed top-4 inset-x-0 max-w-lg mx-auto z-50", className)}
-      className={cn("fixed top-4 inset-x-0 max-w-xl mx-auto z-50", className)}
+      className={cn(
+        "fixed top-4 left-4 right-4 sm:inset-x-0 sm:mx-auto max-w-xl z-50",
+      )}
     >
       <Menu setActive={setActive}>
         <div className="flex justify-between items-center w-full px-4">
@@ -72,8 +78,8 @@ export function Navbar({ className }: { className?: string }) {
               link="/join"
             >
               <div className="flex flex-col space-y-4 text-sm">
-                <HoveredLink href="/join#apply">Apply Now</HoveredLink>
-                <HoveredLink href="/join#tracks">Tracks</HoveredLink>
+                <HoveredLink href="/join">Apply Now</HoveredLink>
+                <HoveredLink href="/join">Tracks</HoveredLink>
               </div>
             </MenuItem>
           </div>

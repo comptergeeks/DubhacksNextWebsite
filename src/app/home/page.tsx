@@ -6,6 +6,7 @@ import HeadingDesc from "../components/HeadingDesc";
 import ScrollingCompanies from "../components/ScrollingCompanies";
 import ImagePreview from "../components/ImagePreviews";
 import Link from "next/link";
+import MailingListButton from "../components/MailingListButton";
 
 // planned component on this page --> what is next?
 // mailing list can be a modal popup
@@ -33,17 +34,17 @@ export default function HomePage() {
         <HeadingDesc title="Interested?" />
         <h1 className="text-center mb-10 text-[2rem]  pr-20 pl-20">
           <Link
-            href="/join#tracks"
-            className="text-pink-600 hover:text-blue-800 underline"
+            href="/join"
+            className="text-pink-600 hover:text-pink-800 underline"
           >
             Click Here
           </Link>{" "}
           to learn more about our Programs
         </h1>
         <div className="text-center">
-          <button className="center inline-flex h-12 animate-shimmer items-center justify-center rounded-md border border-slate-800 bg-[linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)] bg-[length:200%_100%] px-6 font-medium text-slate-400 transition-colors focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50">
+          <MailingListButton href="https://airtable.com/apptsOaJb2Kasu4F6/shrS98NcPXlasBto8">
             Join our Mailing List
-          </button>
+          </MailingListButton>
         </div>
       </div>
     </div>

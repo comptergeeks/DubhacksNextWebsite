@@ -1,94 +1,68 @@
-import React, { useEffect } from "react";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import { motion, useAnimation } from "framer-motion";
+import { AnimatedTooltip } from "../components/ui/animated-tooltip";
+import { DirectionAwareHover } from "../components/ui/direction-aware-hover";
 
-const SectionsWithNavigation = () => {
-  const router = useRouter();
-  const controls = useAnimation();
-
-  useEffect(() => {
-    if (router.asPath.includes("#")) {
-      const id = router.asPath.split("#")[1];
-      const element = document.getElementById(id);
-      if (element) {
-        const yOffset = -80; // Adjust this value to account for any fixed headers
-        const y =
-          element.getBoundingClientRect().top + window.pageYOffset + yOffset;
-
-        controls.start({
-          y: -y,
-          transition: { duration: 0.8, ease: [0.41, 0.13, 0.12, 0.98] },
-        });
-      }
-    }
-  }, [router.asPath, controls]);
-
-  const handleLinkClick = (e, id) => {
-    e.preventDefault();
-    const element = document.getElementById(id);
-    if (element) {
-      const yOffset = -80; // Adjust this value to account for any fixed headers
-      const y =
-        element.getBoundingClientRect().top + window.pageYOffset + yOffset;
-
-      controls.start({
-        y: -y,
-        transition: { duration: 0.8, ease: [0.41, 0.13, 0.12, 0.98] },
-      });
-
-      // Update URL without triggering a page reload
-      window.history.pushState(null, "", `#${id}`);
-    }
-  };
+export default function TeamPage() {
+  const people = [
+    {
+      id: 1,
+      name: "Sthiti",
+      designation: "Director",
+      image: "/team/aunty.jpg",
+    },
+    {
+      id: 2,
+      name: "Varun",
+      designation: "Projects Lead",
+      image: "/team/varunthegoat.jpg",
+    },
+    {
+      id: 3,
+      name: "Farhan",
+      designation: "EiR Lead",
+      image: "/team/farhan.jpg",
+    },
+    {
+      id: 4,
+      name: "Anshul",
+      designation: "Director of Sponsorships",
+      image: "/team/anshulator.jpg",
+    },
+    {
+      id: 5,
+      name: "Abigail",
+      designation: "Marketing Lead",
+      image: "/team/abigail.jpg",
+    },
+    {
+      id: 6,
+      name: "Ryan",
+      designation: "Advisor",
+      image: "/team/ryan.png",
+    },
+  ];
 
   return (
-    <motion.div className="container mx-auto px-4 py-8" animate={controls}>
-      <nav className="mb-8 sticky top-0 bg-white z-10 py-4">
-        <ul className="flex justify-center space-x-4">
-          <li>
-            <Link
-              href="#apply"
-              onClick={(e) => handleLinkClick(e, "apply")}
-              className="text-blue-600 hover:text-blue-800 font-semibold"
-            >
-              Apply
-            </Link>
-          </li>
-          <li>
-            <Link
-              href="#tracks"
-              onClick={(e) => handleLinkClick(e, "tracks")}
-              className="text-blue-600 hover:text-blue-800 font-semibold"
-            >
-              Tracks
-            </Link>
-          </li>
-        </ul>
-      </nav>
-
-      <section id="apply" className="mb-16">
-        <h2 className="text-3xl font-bold mb-4">Apply</h2>
-        <p className="mb-4">
-          Here you can find information about applying to our programs.
-        </p>
-        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-          Start Application
-        </button>
-      </section>
-
-      <section id="tracks" className="mb-16">
-        <h2 className="text-3xl font-bold mb-4">Tracks</h2>
-        <p className="mb-4">Explore our different learning tracks:</p>
-        <ul className="list-disc pl-5">
-          <li>Web Development</li>
-          <li>Data Science</li>
-          <li>Mobile App Development</li>
-          <li>Machine Learning</li>
-        </ul>
-      </section>
-    </motion.div>
+    <div className="mt-20 sm:mt-30 lg:mt-20">
+      <div className="mx-10 sm:mx-20 lg:mx-40 mb-12 border-b border-white border-opacity-25">
+        <div className="flex flex-col md:flex-row items-center gap-10 mb-8">
+          <h1 className="text-white text-4xl md:text-5xl font-bold">Team</h1>
+          <div className="w-full md:w-auto overflow-x-auto md:overflow-x-visible">
+            <div className="inline-flex">
+              <AnimatedTooltip items={people} />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="mx-10 sm:mx-20 lg:mx-40 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        {people.map((person, index) => (
+          <div key={index} className="flex items-center justify-center">
+            <DirectionAwareHover imageUrl={person.image}>
+              <p className="font-bold text-xl">{person.name}</p>
+              <p className="font-normal text-sm">{person.designation}</p>
+            </DirectionAwareHover>
+          </div>
+        ))}
+      </div>
+    </div>
   );
-};
-
-export default SectionsWithNavigation;
+}
