@@ -11,6 +11,7 @@ import Link from "next/link";
 // mailing list can be a modal popup
 // for now just link to the normal airtable one
 // need scroll animations + footer
+// need one text for mobile and one for desktop
 
 export default function HomePage() {
   return (
