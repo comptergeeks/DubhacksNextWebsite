@@ -48,7 +48,7 @@ const ImagePreview = () => {
           >
             <Image
               src={image}
-              alt="image"
+              alt="images will fix bc of this"
               width={500}
               height={500}
               // Adjust these classes to change the size of the images
