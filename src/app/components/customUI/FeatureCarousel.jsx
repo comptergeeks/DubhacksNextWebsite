@@ -53,10 +53,21 @@ const FeatureCarousel = () => {
   const [currentFeature, setCurrentFeature] = useState(0);
   const containerRef = useRef(null);
   const controls = useAnimation();
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   const handleDragEnd = (event, info) => {
-    const dragThreshold = 50;
+    const dragThreshold = isMobile ? 30 : 50;
     const draggedDistance = info.offset.x;
+    const featureWidth = isMobile ? 300 : 380;
 
     if (draggedDistance > dragThreshold && currentFeature > 0) {
       setCurrentFeature(currentFeature - 1);
@@ -66,108 +77,123 @@ const FeatureCarousel = () => {
     ) {
       setCurrentFeature(currentFeature + 1);
     } else {
-      controls.start({ x: -currentFeature * 380 });
+      controls.start({ x: -currentFeature * featureWidth });
     }
   };
 
   useEffect(() => {
-    controls.start({ x: -currentFeature * 380 });
-  }, [currentFeature, controls]);
+    const featureWidth = isMobile ? 300 : 380;
+    controls.start({ x: -currentFeature * featureWidth });
+  }, [currentFeature, controls, isMobile]);
 
   return (
     <div className="w-full max-w-full overflow-hidden relative pb-24">
-      <div className="flex items-center">
+      <div className="flex flex-col md:flex-row items-center">
         <motion.div
-          className="w-[380px] mr-[92px] flex-shrink-0"
-          animate={{ x: -currentFeature * 380 }}
+          className="w-full md:w-[380px] md:mr-[92px] flex-shrink-0 mb-8 md:mb-0"
+          animate={{ x: isMobile ? 0 : -currentFeature * 380 }}
           transition={{ type: "spring", stiffness: 300, damping: 30 }}
         >
-          <h2 className="text-6xl font-bold mb-8">our program</h2>
-          <div className="px-4 flex items-center space-x-4">
+          <h2 className="text-4xl md:text-6xl font-bold mb-4 md:mb-8">
+            our program
+          </h2>
+          <div className="px-4 flex items-center space-x-4 mb-2">
             <Image
               src="/icons/arrowup.png"
               alt="Raised amount icon"
               width={32}
               height={32}
             />
-            <h2 className="text-[#FFB4F8] text-5xl font-bold">$1M</h2>
+            <h2 className="text-[#FFB4F8] text-3xl md:text-5xl font-bold">
+              $1M
+            </h2>
           </div>
-          <p className="px-4">
+          <p className="px-4 mb-4">
             Our Founders have gone on to raise quite a bit of $$$.
           </p>
-          <div className="px-4 flex items-center space-x-4">
+          <div className="px-4 flex items-center space-x-4 mb-2">
             <Image
               src="/icons/calendar.png"
-              alt="Raised amount icon"
+              alt="Duration icon"
               width={32}
               height={32}
             />
-            <h2 className="text-[#FFB4F8] text-5xl font-bold">16 weeks</h2>
+            <h2 className="text-[#FFB4F8] text-3xl md:text-5xl font-bold">
+              16 weeks
+            </h2>
           </div>
           <p className="px-4">
-            Our Founders have gone on to raise quite a bit of $$$.
+            Our program lasts for an intensive 16-week period.
           </p>
         </motion.div>
         <motion.div
           ref={containerRef}
-          className="flex cursor-grab active:cursor-grabbing"
+          className="flex cursor-grab active:cursor-grabbing w-full md:w-auto"
           animate={controls}
           drag="x"
-          dragConstraints={{ left: -(features.length - 1) * 380, right: 0 }}
+          dragConstraints={{
+            left: -(features.length - 1) * (isMobile ? 300 : 380),
+            right: 0,
+          }}
           dragElastic={0.1}
           onDragEnd={handleDragEnd}
         >
           {features.map((feature, index) => (
             <div
               key={index}
-              className={`shrink-0 p-8 rounded-[40px] ${feature.bgColor} border-white/60 border-[1px] w-[340px] h-[540px] mr-[40px] flex flex-col`}
+              className={`shrink-0 p-6 md:p-8 rounded-[30px] md:rounded-[40px] ${feature.bgColor} border-white/60 border-[1px] w-[280px] md:w-[340px] h-[480px] md:h-[540px] mr-[20px] md:mr-[40px] flex flex-col`}
             >
               <div className="flex items-center mb-3">
                 <Image
                   src={feature.icon}
                   alt={feature.title}
-                  width={60}
-                  height={60}
-                  className="-m-3"
+                  width={48}
+                  height={48}
+                  className="-m-2 md:-m-3"
                 />
                 <h3
-                  className={`text-[22px] ${feature.textColor} font-semibold ml-3`}
+                  className={`text-[18px] md:text-[22px] ${feature.textColor} font-semibold ml-3`}
                 >
                   {feature.title}
                 </h3>
               </div>
               <p
-                className={`text-[18px] ${feature.textColor === "text-white" ? "text-white/35" : "text-[#808080]"} opacity-80 font-medium`}
+                className={`text-[16px] md:text-[18px] ${feature.textColor === "text-white" ? "text-white/35" : "text-[#808080]"} opacity-80 font-medium`}
               >
                 {feature.description}
               </p>
               <Image
                 src={feature.image}
                 alt={`${feature.title} preview`}
-                width={320}
-                height={307}
-                className="mt-4 -mx-6"
+                width={260}
+                height={250}
+                className="mt-4 -mx-4 md:-mx-6"
               />
             </div>
           ))}
         </motion.div>
       </div>
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 flex gap-4">
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 flex gap-2 md:gap-4">
         {features.map((feature, index) => (
           <button
             key={index}
             onClick={() => setCurrentFeature(index)}
-            className="flex items-center justify-center relative before:content-[''] before:absolute before:w-[38px] before:h-[40px] before:top-[50%] before:left-[50%] before:-translate-x-[50%] before:-translate-y-[50%]"
+            className="flex items-center justify-center relative before:content-[''] before:absolute before:w-[30px] md:before:w-[38px] before:h-[32px] md:before:h-[40px] before:top-[50%] before:left-[50%] before:-translate-x-[50%] before:-translate-y-[50%]"
           >
             <span
               className={`
-                inline-flex rounded-full text-white text-[14px] font-semibold px-1 py-1 overflow-hidden box-border pointer-events-none
+                inline-flex rounded-full text-white text-[12px] md:text-[14px] font-semibold px-1 py-1 overflow-hidden box-border pointer-events-none
                 whitespace-nowrap backdrop-blur-sm
                 justify-center bg-black/30 translate-z-0
               `}
               style={{
-                width: index === currentFeature ? "100px" : "8px",
-                height: index === currentFeature ? "28px" : "8px",
+                width:
+                  index === currentFeature
+                    ? isMobile
+                      ? "80px"
+                      : "100px"
+                    : "8px",
+                height: index === currentFeature ? "24px" : "8px",
                 color:
                   index === currentFeature
                     ? "rgb(255, 255, 255)"
