@@ -1,5 +1,11 @@
-import { redirect } from "next/navigation";
+import Image from "next/image";
+import { LandingPage } from "../app/components/LandingBackground";
+import Link from "next/link";
 
 export default function Home() {
-  redirect("/home");
+  return (
+    <div>
+      <LandingPage />
+    </div>
+  );
 }
