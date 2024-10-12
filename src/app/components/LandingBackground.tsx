@@ -71,32 +71,34 @@ export function LandingPage() {
 
   async function bozo() {
     let createResponse;
-    try {
-      createResponse = await fetch(
-        `https://api.airtable.com/v0/${BASE_ID}/${TABLE_ID}`,
-        {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${PAT}`,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            fields: {
-              Email: email,
-              "How did you hear": "DH 2024",
+    if (email.trim() !== "") {
+      try {
+        createResponse = await fetch(
+          `https://api.airtable.com/v0/${BASE_ID}/${TABLE_ID}`,
+          {
+            method: "POST",
+            headers: {
+              Authorization: `Bearer ${PAT}`,
+              "Content-Type": "application/json",
             },
-            typecast: true,
-          }),
-        },
-      );
+            body: JSON.stringify({
+              fields: {
+                Email: email,
+                "How did you hear": "DH 2024",
+              },
+              typecast: true,
+            }),
+          },
+        );
 
-      if (!createResponse.ok) {
-        // If the response is not OK, throw an error with the status
-        throw new Error(`HTTP error! status: ${createResponse.status}`);
+        if (!createResponse.ok) {
+          // If the response is not OK, throw an error with the status
+          throw new Error(`HTTP error! status: ${createResponse.status}`);
+        }
+        setEmail("");
+      } catch (error) {
+        console.error("Error creating new contact:", error);
       }
-      setEmail("");
-    } catch (error) {
-      console.error("Error creating new contact:", error);
     }
   }
 
@@ -140,6 +142,9 @@ export function LandingPage() {
             dedicated to providing an elite entrepreneurship experience for the
             most talented builders on campus.
           </p>
+          <h4 className="text-[1rem]  font-bold text-white z-20 mb-4 text-opacity-75 text-center">
+            Subscribe to our mailing list!
+          </h4>
           <div className="z-10 w-full max-w-md px-4 flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-4">
             <Input
               className="w-full sm:w-[20rem] h-12 px-4 rounded-md text-black border border-neutral-700 focus:border-white focus:ring-2 focus:ring-white focus:ring-opacity-50 transition duration-300 ease-in-out"

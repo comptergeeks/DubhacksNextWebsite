@@ -61,7 +61,7 @@ const TracksComponent = () => {
     {
       title: "EiR Track",
       description:
-        "For students who are passionate about entrepreneurship and seeking out their next venture, but are not sure where to start",
+        "For students who are passionate about entrepreneurship and seeking out their next venture, but are not sure where to start.",
       features: [
         { icon: <Sparkles size={20} />, text: "Workshops and Speakers" },
         { icon: <Calendar size={20} />, text: "Community Events" },
