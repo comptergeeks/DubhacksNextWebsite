@@ -1,4 +1,5 @@
-import React from "react";
+"use client";
+import React, { useCallback } from "react";
 import Image from "next/image";
 import { ShootingStars } from "../../app/components/ui/shooting-stars";
 import { StarsBackground } from "../../app/components/ui/stars-background";
@@ -57,6 +58,14 @@ const people = [
 ];
 
 export function LandingPage() {
+  const scrollToTracks = useCallback(() => {
+    const tracksSection = document.getElementById("tracks-section");
+    if (tracksSection) {
+      tracksSection.scrollIntoView({ behavior: "smooth" });
+    }
+  }, []);
+
+  //        <FloatingNav />
   return (
     <div className={`${generalSans.variable} font-sans`}>
       <div className="fixed inset-0 z-0">
@@ -65,8 +74,6 @@ export function LandingPage() {
       </div>
 
       <div className="relative z-10">
-        <FloatingNav />
-
         <section className="min-h-screen flex flex-col items-center justify-center px-4 relative">
           <Image
             src="/logos/dubhacksnext.png"
@@ -75,7 +82,10 @@ export function LandingPage() {
             height={84}
             className="mb-4 sm:mb-8"
           />
-          <div className="inline-flex py-2 sm:py-4 h-auto sm:h-10 text-[0.875rem] sm:text-[1rem] animate-shimmer items-center rounded-[0.5rem] border border-slate-800 bg-[linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)] bg-[length:200%_100%] px-3 sm:pl-4 sm:pr-6 font-semibold text-[#d0d0d0] transition-colors focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50">
+          <div
+            onClick={scrollToTracks}
+            className="inline-flex py-2 sm:py-4 h-auto sm:h-10 text-[0.875rem] sm:text-[1rem] animate-shimmer items-center rounded-[0.5rem] border border-slate-800 bg-[linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)] bg-[length:200%_100%] px-3 sm:pl-4 sm:pr-6 font-semibold text-[#d0d0d0] transition-colors focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 cursor-pointer"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="20"
@@ -85,7 +95,7 @@ export function LandingPage() {
             >
               <path d="M183.89,153.34a57.6,57.6,0,0,1-46.56,46.55A8.75,8.75,0,0,1,136,200a8,8,0,0,1-1.32-15.89c16.57-2.79,30.63-16.85,33.44-33.45a8,8,0,0,1,15.78,2.68ZM216,144a88,88,0,0,1-176,0c0-27.92,11-56.47,32.66-84.85a8,8,0,0,1,11.93-.89l24.12,23.41,22-60.41a8,8,0,0,1,12.63-3.41C165.21,36,216,84.55,216,144Zm-16,0c0-46.09-35.79-85.92-58.21-106.33L119.52,98.74a8,8,0,0,1-13.09,3L80.06,76.16C64.09,99.21,56,122,56,144a72,72,0,0,0,144,0Z"></path>
             </svg>
-            UW Entrepreneurship Organization
+            Apply Now to Batch 4
           </div>
           <h1 className="text-[2.5rem] sm:text-[4rem] md:text-[6rem] font-bold text-white z-20 mb-4 text-opacity-75 text-center">
             DUBHACKS NEXT
@@ -106,10 +116,8 @@ export function LandingPage() {
               Sign Up!
             </button>
           </div>
-          <div className="absolute bottom-4 left-0 right-0 flex justify-between px-4 sm:px-8">
-            <ScrollDown position="left" />
-            <ScrollDown position="right" />
-          </div>
+          <ScrollDown position="left" />
+          <ScrollDown position="right" />
         </section>
 
         <section className="w-screen text-white py-10 sm:py-20">
@@ -121,12 +129,12 @@ export function LandingPage() {
         <section className="w-screen text-white py-10 sm:py-20">
           <div className="max-w-screen mx-auto px-4 sm:px-10">
             <div className="flex flex-col sm:flex-row items-center sm:items-start mb-8">
-              <div className="w-full sm:w-[380px] mb-4 sm:mb-0">
+              <div className="w-full sm:w-[500px] mb-4 sm:mb-0">
                 <h2 className="text-4xl sm:text-6xl font-bold text-center sm:text-left">
                   the team
                 </h2>
               </div>
-              <div className="flex flex-row justify-center sm:justify-start sm:-ml-24 overflow-x-auto">
+              <div className="flex flex-row justify-center sm:justify-start lg:-ml-48 sm:-ml-24 ">
                 <AnimatedTooltip items={people} />
               </div>
             </div>
@@ -143,7 +151,10 @@ export function LandingPage() {
           </div>
         </section>
 
-        <section className="w-screen text-white py-10 sm:py-20">
+        <section
+          id="tracks-section"
+          className="w-screen text-white py-10 sm:py-20"
+        >
           <div className="max-w-screen mx-auto px-4 sm:px-10">
             <div className="mb-8">
               <h2 className="text-4xl sm:text-6xl font-bold text-center sm:text-left">

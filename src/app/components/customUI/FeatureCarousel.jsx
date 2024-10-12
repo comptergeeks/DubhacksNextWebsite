@@ -6,46 +6,36 @@ import Image from "next/image";
 
 const features = [
   {
-    title: "NLP Scheduling",
+    title: "Talent",
     description:
-      "Schedule your todos using natural language, Amie understands you.",
-    image: "",
-    icon: "",
+      "Selective program supporting 30+ of the most talented builders at the University of Washington.",
+    image: "/batch/img_8073_720.jpg",
     bgColor: "bg-black/40",
     textColor: "text-white",
   },
   {
-    title: "Widgets",
-    description: "Birthdays, todos and schedules – only a glance away.",
-    image: "",
-    icon: "",
-    bgColor: "bg-white/75",
-    textColor: "text-neutral",
-  },
-  {
-    title: "Multiple accounts",
-    description: "All your accounts, happily together in one place.",
-    image: "",
-    icon: "",
-    bgColor: "bg-white/75",
-    textColor: "text-neutral",
-  },
-  {
-    title: "Pomodoro",
-    description: "Find the right balance between focus and breaks.",
-    image: "",
-    icon: "",
-    bgColor: "bg-white/75",
-    textColor: "text-neutral",
-  },
-  {
-    title: "Timezones",
+    title: "Learn",
     description:
-      "Traveling? Amie helps you juggle multiple timezones so you can beat the jet lag.",
-    image: "",
-    icon: "",
-    bgColor: "bg-[#2A2A2A]",
-    textColor: "text-white",
+      "16 weeks of workshops, fireside chats, and build sessions to help take you from idea to product.",
+    image: "/batch/IMG_1970.jpg",
+    bgColor: "bg-black/40",
+    textColor: "text-neutral",
+  },
+  {
+    title: "Community",
+    description:
+      "Fun community events to create lasting memories throughout the year.",
+    image: "/batch/DSC09891.jpg",
+    bgColor: "bg-black/40",
+    textColor: "text-neutral",
+  },
+  {
+    title: "Demo",
+    description:
+      "Final Demo Day with product pitches to investors, founders, and other members of the Seattle startup community.",
+    image: "/batch/_dsc5092_720.jpg",
+    bgColor: "bg-black/40",
+    textColor: "text-neutral",
   },
 ];
 
@@ -97,34 +87,18 @@ const FeatureCarousel = () => {
           <h2 className="text-4xl md:text-6xl font-bold mb-4 md:mb-8">
             our program
           </h2>
-          <div className="px-4 flex items-center space-x-4 mb-2">
-            <Image
-              src="/icons/arrowup.png"
-              alt="Raised amount icon"
-              width={32}
-              height={32}
-            />
-            <h2 className="text-[#FFB4F8] text-3xl md:text-5xl font-bold">
+          <div className="px-4 mb-4">
+            <h2 className="text-[#FFB4F8] text-3xl md:text-5xl font-bold mb-2">
               $1M
             </h2>
+            <p>Our Founders have gone on to raise quite a bit of $$$.</p>
           </div>
-          <p className="px-4 mb-4">
-            Our Founders have gone on to raise quite a bit of $$$.
-          </p>
-          <div className="px-4 flex items-center space-x-4 mb-2">
-            <Image
-              src="/icons/calendar.png"
-              alt="Duration icon"
-              width={32}
-              height={32}
-            />
-            <h2 className="text-[#FFB4F8] text-3xl md:text-5xl font-bold">
+          <div className="px-4">
+            <h2 className="text-[#FFB4F8] text-3xl md:text-5xl font-bold mb-2">
               16 weeks
             </h2>
+            <p>Our program lasts for an intensive 16-week period.</p>
           </div>
-          <p className="px-4">
-            Our program lasts for an intensive 16-week period.
-          </p>
         </motion.div>
         <motion.div
           ref={containerRef}
@@ -141,34 +115,32 @@ const FeatureCarousel = () => {
           {features.map((feature, index) => (
             <div
               key={index}
-              className={`shrink-0 p-6 md:p-8 rounded-[30px] md:rounded-[40px] ${feature.bgColor} border-white/60 border-[1px] w-[280px] md:w-[340px] h-[480px] md:h-[540px] mr-[20px] md:mr-[40px] flex flex-col`}
+              className={`shrink-0 rounded-[30px] md:rounded-[40px] ${feature.bgColor} border-white/60 border-[1px] w-[280px] md:w-[340px] h-[480px] md:h-[540px] mr-[20px] md:mr-[40px] flex flex-col overflow-hidden`}
             >
-              <div className="flex items-center mb-3">
+              <div className="relative w-full h-[60%]">
                 <Image
-                  src={feature.icon}
-                  alt={feature.title}
-                  width={48}
-                  height={48}
-                  className="-m-2 md:-m-3"
+                  src={feature.image}
+                  alt={`${feature.title} preview`}
+                  layout="fill"
+                  objectFit="cover"
                 />
+              </div>
+              <div className="p-6 md:p-8 flex flex-col justify-between h-[40%]">
                 <h3
-                  className={`text-[18px] md:text-[22px] ${feature.textColor} font-semibold ml-3`}
+                  className={`text-[18px] md:text-[22px] ${feature.textColor} font-semibold mb-2`}
                 >
                   {feature.title}
                 </h3>
+                <p
+                  className={`text-[16px] md:text-[18px] ${
+                    feature.textColor === "text-white"
+                      ? "text-white/35"
+                      : "text-[#808080]"
+                  } opacity-80 font-medium`}
+                >
+                  {feature.description}
+                </p>
               </div>
-              <p
-                className={`text-[16px] md:text-[18px] ${feature.textColor === "text-white" ? "text-white/35" : "text-[#808080]"} opacity-80 font-medium`}
-              >
-                {feature.description}
-              </p>
-              <Image
-                src={feature.image}
-                alt={`${feature.title} preview`}
-                width={260}
-                height={250}
-                className="mt-4 -mx-4 md:-mx-6"
-              />
             </div>
           ))}
         </motion.div>
