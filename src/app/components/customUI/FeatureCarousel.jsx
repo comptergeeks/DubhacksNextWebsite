@@ -89,12 +89,11 @@ const FeatureCarousel = () => {
           </h2>
           <div className="px-4 mb-4">
             <h2 className="text-[#FFB4F8] text-3xl md:text-5xl font-bold mb-2">
-              $1M
+              $1M+ Raised
             </h2>
             <p>
-              Our Founders have gone on to raise over $1 million worth in term
-              sheets from investors like, Y-Combinator, Ripple Ventures, and
-              more.
+              Our Founders have raised over $1 million worth in term sheets from
+              investors like, Y-Combinator, Ripple Ventures, and more.
             </p>
           </div>
           <div className="px-4">

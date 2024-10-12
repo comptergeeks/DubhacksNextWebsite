@@ -44,18 +44,6 @@ const TrackCard = ({ title, description, features, applyHref }) => (
 const TracksComponent = () => {
   const tracks = [
     {
-      title: "EiR Track",
-      description:
-        "The EiR track is perfect for students who are interested in entrepreneurship but may not know where to start, don't have an idea but want to build.",
-      features: [
-        { icon: <Sparkles size={20} />, text: "Workshops and Speakers" },
-        { icon: <Calendar size={20} />, text: "Community Events" },
-        { icon: <Users size={20} />, text: "Networking Opportunities" },
-      ],
-      applyHref:
-        "https://airtable.com/app8dwLTZzIrN6zkg/pagr4gIIigbiomMk9/form",
-    },
-    {
       title: "Project Track",
       description:
         "The project track is perfect for students and teams who have at least a drafted prototype for a product/project and are looking to make it a startup.",
@@ -70,6 +58,18 @@ const TracksComponent = () => {
       applyHref:
         "https://airtable.com/appzMr0z2UPvOlIlF/pagS8h2nTjBy2JB3g/form",
     },
+    {
+      title: "EiR Track",
+      description:
+        "The EiR track is perfect for students who are interested in entrepreneurship but may not know where to start, don't have an idea but want to build.",
+      features: [
+        { icon: <Sparkles size={20} />, text: "Workshops and Speakers" },
+        { icon: <Calendar size={20} />, text: "Community Events" },
+        { icon: <Users size={20} />, text: "Networking Opportunities" },
+      ],
+      applyHref:
+        "https://airtable.com/app8dwLTZzIrN6zkg/pagr4gIIigbiomMk9/form",
+    },
   ];
 
   return (
@@ -79,9 +79,11 @@ const TracksComponent = () => {
           <TrackCard key={index} {...track} />
         ))}
       </div>
-      <p className="text-center text-white/70 mt-8">
-        Both of the programs benefit from the following resources: Strong
-        Community • Exclusive Opportunities
+      <p className="text-center text-white/70 mt-8 italic">
+        Not sure which track to apply for? Email us at{" "}
+        <Link className="font-bold" href="mailto:ext@dubhacks.co">
+          next@dubhacks.co
+        </Link>
       </p>
     </div>
   );
