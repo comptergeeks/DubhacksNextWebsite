@@ -1,5 +1,4 @@
 "use client";
-
 import React from "react";
 import { motion } from "framer-motion";
 import {
@@ -22,14 +21,16 @@ const TrackCard = ({ title, description, features, applyHref }) => (
   >
     <h3 className="text-2xl font-bold mb-4 text-white">{title}</h3>
     <p className="text-white/80 mb-6">{description}</p>
-    <ul className="space-y-3 mb-6">
+    <div
+      className={`grid ${title === "Project Track" ? "grid-cols-2" : "grid-cols-1"} gap-4 mb-6`}
+    >
       {features.map((feature, index) => (
-        <li key={index} className="flex items-center text-white/90">
+        <div key={index} className="flex items-center text-white/90">
           {feature.icon}
           <span className="ml-3">{feature.text}</span>
-        </li>
+        </div>
       ))}
-    </ul>
+    </div>
     <div className="mt-auto flex justify-center">
       <Link href={applyHref}>
         <button className="whitespace-nowrap h-12 px-6 text-[1rem] animate-shimmer items-center rounded-[0.5rem] border border-slate-800 bg-[linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)] bg-[length:200%_100%] font-semibold text-[#d0d0d0] transition-colors focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50">
@@ -43,7 +44,7 @@ const TrackCard = ({ title, description, features, applyHref }) => (
 const TracksComponent = () => {
   const tracks = [
     {
-      title: "EiR track",
+      title: "EiR Track",
       description:
         "The EiR track is perfect for students who are interested in entrepreneurship but may not know where to start, don't have an idea but want to build.",
       features: [
@@ -52,23 +53,25 @@ const TracksComponent = () => {
         { icon: <Users size={20} />, text: "Networking Opportunities" },
       ],
       applyHref:
-        "https://airtable.com/app8dwLTZzIrN6zkg/pagr4gIIigbiomMk9/form", // Replace with actual application link
+        "https://airtable.com/app8dwLTZzIrN6zkg/pagr4gIIigbiomMk9/form",
     },
     {
-      title: "Project track",
+      title: "Project Track",
       description:
         "The project track is perfect for students and teams who have at least a drafted prototype for a product/project and are looking to make it a startup.",
       features: [
-        { icon: <Rocket size={20} />, text: "Funding Opportunities" },
+        { icon: <Sparkles size={20} />, text: "Workshops and Speakers" },
         { icon: <Lightbulb size={20} />, text: "Ad-Hoc Advising" },
+        { icon: <Calendar size={20} />, text: "Community Events" },
+        { icon: <Rocket size={20} />, text: "Funding Opportunities" },
+        { icon: <Users size={20} />, text: "Networking Opportunities" },
         { icon: <Zap size={20} />, text: "Compute Resources" },
       ],
       applyHref:
-        "https://airtable.com/appzMr0z2UPvOlIlF/pagS8h2nTjBy2JB3g/form", // Replace with actual application link
+        "https://airtable.com/appzMr0z2UPvOlIlF/pagS8h2nTjBy2JB3g/form",
     },
   ];
 
-  // to this piece add a blurb about what you gain from the batch
   return (
     <div className="container mx-auto px-4 py-12">
       <div className="grid md:grid-cols-2 gap-8">

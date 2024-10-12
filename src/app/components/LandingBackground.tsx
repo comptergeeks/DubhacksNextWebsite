@@ -116,8 +116,10 @@ export function LandingPage() {
               Sign Up!
             </button>
           </div>
-          <ScrollDown position="left" />
-          <ScrollDown position="right" />
+          <div className="hidden sm:block">
+            <ScrollDown position="left" />
+            <ScrollDown position="right" />
+          </div>
         </section>
 
         <section className="w-screen text-white py-10 sm:py-20">

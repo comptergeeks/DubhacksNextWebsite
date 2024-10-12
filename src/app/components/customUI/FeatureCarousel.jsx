@@ -14,9 +14,9 @@ const features = [
     textColor: "text-white",
   },
   {
-    title: "Learn",
+    title: "Curriculum",
     description:
-      "16 weeks of workshops, fireside chats, and build sessions to help take you from idea to product.",
+      "Workshops, fireside chats, and build sessions to help take you from idea to product.",
     image: "/batch/IMG_1970.jpg",
     bgColor: "bg-black/40",
     textColor: "text-neutral",
@@ -30,7 +30,7 @@ const features = [
     textColor: "text-neutral",
   },
   {
-    title: "Demo",
+    title: "Demo Day",
     description:
       "Final Demo Day with product pitches to investors, founders, and other members of the Seattle startup community.",
     image: "/batch/_dsc5092_720.jpg",
@@ -91,13 +91,20 @@ const FeatureCarousel = () => {
             <h2 className="text-[#FFB4F8] text-3xl md:text-5xl font-bold mb-2">
               $1M
             </h2>
-            <p>Our Founders have gone on to raise quite a bit of $$$.</p>
+            <p>
+              Our Founders have gone on to raise over $1 million worth in term
+              sheets from investors like, Y-Combinator, Ripple Ventures, and
+              more.
+            </p>
           </div>
           <div className="px-4">
             <h2 className="text-[#FFB4F8] text-3xl md:text-5xl font-bold mb-2">
               16 weeks
             </h2>
-            <p>Our program lasts for an intensive 16-week period.</p>
+            <p>
+              Our program lasts for an intensive 16-week period, full of
+              building, learning, and growth as student founders.
+            </p>
           </div>
         </motion.div>
         <motion.div
