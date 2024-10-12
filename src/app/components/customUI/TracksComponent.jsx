@@ -81,7 +81,7 @@ const TracksComponent = () => {
       </div>
       <p className="text-center text-white/70 mt-8 italic">
         Not sure which track to apply for? Email us at{" "}
-        <Link className="font-bold" href="mailto:ext@dubhacks.co">
+        <Link className="font-bold" href="mailto:next@dubhacks.co">
           next@dubhacks.co
         </Link>
       </p>

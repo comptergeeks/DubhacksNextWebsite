@@ -1,5 +1,5 @@
 "use client";
-import React, { useCallback } from "react";
+import React, { useCallback, useState } from "react";
 import Image from "next/image";
 import { ShootingStars } from "../../app/components/ui/shooting-stars";
 import { StarsBackground } from "../../app/components/ui/stars-background";
@@ -11,7 +11,10 @@ import FeatureCarousel from "../../app/components/customUI/FeatureCarousel";
 import { AnimatedTooltip } from "./ui/animated-tooltip";
 import { DirectionAwareHover } from "./ui/direction-aware-hover";
 import TracksComponent from "../../app/components/customUI/TracksComponent";
-
+const BASE_ID = "apptsOaJb2Kasu4F6";
+const TABLE_ID = "tblg6FqzjGJt51wxE";
+const PAT =
+  "patzWNu2VYZ2tvDcH.b11d3416ad433d4a7181e459ad4eb6417f30db616feb313d48d564a2dd25f51d";
 const generalSans = localFont({
   src: "../fonts/GeneralSans-Variable.woff2",
   variable: "--font-general-sans",
@@ -58,12 +61,44 @@ const people = [
 ];
 
 export function LandingPage() {
+  const [email, setEmail] = useState("");
   const scrollToTracks = useCallback(() => {
     const tracksSection = document.getElementById("tracks-section");
     if (tracksSection) {
       tracksSection.scrollIntoView({ behavior: "smooth" });
     }
   }, []);
+
+  async function bozo() {
+    let createResponse;
+    try {
+      createResponse = await fetch(
+        `https://api.airtable.com/v0/${BASE_ID}/${TABLE_ID}`,
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${PAT}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            fields: {
+              Email: email,
+              "How did you hear": "DH 2024",
+            },
+            typecast: true,
+          }),
+        },
+      );
+
+      if (!createResponse.ok) {
+        // If the response is not OK, throw an error with the status
+        throw new Error(`HTTP error! status: ${createResponse.status}`);
+      }
+      setEmail("");
+    } catch (error) {
+      console.error("Error creating new contact:", error);
+    }
+  }
 
   //        <FloatingNav />
   return (
@@ -111,8 +146,13 @@ export function LandingPage() {
               id="email"
               placeholder="youremail@example.com"
               type="email"
+              value={email}
+              onChange={(e) => setEmail(e.currentTarget.value)}
             />
-            <button className="w-full sm:w-auto whitespace-nowrap h-12 px-6 text-[1rem] animate-shimmer items-center rounded-[0.5rem] border border-slate-800 bg-[linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)] bg-[length:200%_100%] font-semibold text-[#d0d0d0] transition-colors focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50">
+            <button
+              className="w-full sm:w-auto whitespace-nowrap h-12 px-6 text-[1rem] animate-shimmer items-center rounded-[0.5rem] border border-slate-800 bg-[linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)] bg-[length:200%_100%] font-semibold text-[#d0d0d0] transition-colors focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50"
+              onClick={bozo}
+            >
               Sign Up!
             </button>
           </div>
@@ -160,7 +200,7 @@ export function LandingPage() {
           <div className="max-w-screen mx-auto px-4 sm:px-10">
             <div className="mb-8">
               <h2 className="text-4xl sm:text-6xl font-bold text-center sm:text-left">
-                our tracks
+                the tracks
               </h2>
             </div>
             <TracksComponent />
