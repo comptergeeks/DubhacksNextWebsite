@@ -46,7 +46,7 @@ const TracksComponent = () => {
     {
       title: "Project Track",
       description:
-        "The project track is perfect for students and teams who have at least a drafted prototype for a product/project and are looking to make it a startup.",
+        "For indivduals and teams who are currently building a product or project and want to make it a startup.",
       features: [
         { icon: <Sparkles size={20} />, text: "Workshops and Speakers" },
         { icon: <Lightbulb size={20} />, text: "Ad-Hoc Advising" },
@@ -61,7 +61,7 @@ const TracksComponent = () => {
     {
       title: "EiR Track",
       description:
-        "The EiR track is perfect for students who are interested in entrepreneurship but may not know where to start, don't have an idea but want to build.",
+        "For students who are passionate about entrepreneurship and seeking out their next venture, but are not sure where to start",
       features: [
         { icon: <Sparkles size={20} />, text: "Workshops and Speakers" },
         { icon: <Calendar size={20} />, text: "Community Events" },
